@@ -1,0 +1,473 @@
+<html lang="en">
+<head>
+  <title>TuxMindMath</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <script src="bower_components/webcomponentsjs/webcomponents.js"></script>
+  <link rel="import" href="elements.html">
+  <link href="style.css" rel="stylesheet">
+  <style>
+
+   .sk-folding-cube {
+   margin: 20px auto;
+   width: 40px;
+   height: 40px;
+   position: relative;
+   -webkit-transform: rotateZ(45deg);
+           transform: rotateZ(45deg);
+ }
+
+ .sk-folding-cube .sk-cube {
+   float: left;
+   width: 50%;
+   height: 50%;
+   position: relative;
+   -webkit-transform: scale(1.1);
+       -ms-transform: scale(1.1);
+           transform: scale(1.1);
+ }
+ .sk-folding-cube .sk-cube:before {
+   content: '';
+   position: absolute;
+
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background-color: pink;
+   vertical-align: middle;
+   -webkit-animation: sk-foldCubeAngle 2.4s infinite linear both;
+           animation: sk-foldCubeAngle 2.4s infinite linear both;
+   -webkit-transform-origin: 100% 100%;
+       -ms-transform-origin: 100% 100%;
+           transform-origin: 100% 100%;
+ }
+ .sk-folding-cube .sk-cube2 {
+   -webkit-transform: scale(1.1) rotateZ(90deg);
+           transform: scale(1.1) rotateZ(90deg);
+ }
+ .sk-folding-cube .sk-cube3 {
+   -webkit-transform: scale(1.1) rotateZ(180deg);
+           transform: scale(1.1) rotateZ(180deg);
+ }
+ .sk-folding-cube .sk-cube4 {
+   -webkit-transform: scale(1.1) rotateZ(270deg);
+           transform: scale(1.1) rotateZ(270deg);
+ }
+ .sk-folding-cube .sk-cube2:before {
+   -webkit-animation-delay: 0.3s;
+           animation-delay: 0.3s;
+ }
+ .sk-folding-cube .sk-cube3:before {
+   -webkit-animation-delay: 0.6s;
+           animation-delay: 0.6s;
+ }
+ .sk-folding-cube .sk-cube4:before {
+   -webkit-animation-delay: 0.9s;
+           animation-delay: 0.9s;
+ }
+ @-webkit-keyframes sk-foldCubeAngle {
+   0%, 10% {
+     -webkit-transform: perspective(140px) rotateX(-180deg);
+             transform: perspective(140px) rotateX(-180deg);
+     opacity: 0;
+   } 25%, 75% {
+     -webkit-transform: perspective(140px) rotateX(0deg);
+             transform: perspective(140px) rotateX(0deg);
+     opacity: 1;
+   } 90%, 100% {
+     -webkit-transform: perspective(140px) rotateY(180deg);
+             transform: perspective(140px) rotateY(180deg);
+     opacity: 0;
+   }
+ }
+
+ @keyframes sk-foldCubeAngle {
+   0%, 10% {
+     -webkit-transform: perspective(140px) rotateX(-180deg);
+             transform: perspective(140px) rotateX(-180deg);
+     opacity: 0;
+   } 25%, 75% {
+     -webkit-transform: perspective(140px) rotateX(0deg);
+             transform: perspective(140px) rotateX(0deg);
+     opacity: 1;
+   } 90%, 100% {
+     -webkit-transform: perspective(140px) rotateY(180deg);
+             transform: perspective(140px) rotateY(180deg);
+     opacity: 0;
+   }
+ }
+ </style>
+ </head>
+
+ <body>
+   <div class="sk-folding-cube">
+   <div class="sk-cube1 sk-cube"></div>
+   <div class="sk-cube2 sk-cube"></div>
+   <div class="sk-cube4 sk-cube"></div>
+   <div class="sk-cube3 sk-cube"></div>
+   </div>
+
+ <div unresolved>
+  <template is="dom-bind" id="app">
+  <paper-drawer-panel id="drawerPanel" responsive-width="820px" >
+  <paper-header-panel mode="waterfall-tall" tallClass = "medium-tall" class="paper_toolbar_drawer" shadow = "true" drawer>
+
+    <paper-toolbar class = "drawer_toolbar">
+      <div id="logo"><img src = "app_assets/mm.png"></img></div>
+    </paper-toolbar>
+
+    <paper-menu id="menu-items" selected="{{page}}">
+
+        <paper-item label="Home" style="position:relative">
+          <paper-ripple style="color: #3e2723"></paper-ripple>
+          <paper-icon-button icon="home" style="color: #3e2723">
+          </paper-icon-button>
+          <div>
+            Home
+          </div>
+
+        </paper-item>
+
+
+
+        <paper-item label="Games"style="position:relative">
+          <paper-ripple style="color: #ff5722"></paper-ripple>
+          <paper-icon-button icon="social:cake" style="color: #ff5722">
+          </paper-icon-button>
+            <div>Games</div>
+        </paper-item>
+
+        <paper-item label="Tux4Kids" style="position:relative">
+          <paper-ripple style="color: #00bfa5"></paper-ripple>
+          <paper-icon-button icon="hardware:toys" style="color: #00bfa5">
+          </paper-icon-button>
+            <div>Tux4Kids</div>
+        </paper-item>
+
+        <paper-item  label="Feedback"style="position:relative">
+          <paper-ripple style="color: #e91e63"></paper-ripple>
+          <paper-icon-button icon="favorite" style="color: #e91e63">
+          </paper-icon-button>
+            <div>Feedback</div>
+        </paper-item>
+    </paper-menu>
+  </paper-header-panel>
+
+  <paper-header-panel main mode="standard" class="paper_toolbar_main main_content_area">
+
+    <paper-toolbar class = "main_toolbar" id="toolBar_content">
+      <paper-icon-button icon="menu" alt="menu" class="white" paper-drawer-toggle>
+      </paper-icon-button>
+
+      <div class = "title" style="font-family:Georgia;font-size: 20px;color:#009688">
+        Tux Mind Math
+      </div>
+      <div style="font-family:Georgia;font-style: italic;font-size: 15px;color:#009688">
+      Vedic Math tricks for kids!
+      <!--
+      <paper-icon-button icon="account-circle" alt="more-horiz" class="white">
+      </paper-icon-button>
+    -->
+      <img src="assets/bluePenguin_16_16.png"></img>
+      </div>
+      </paper-toolbar>
+
+      <div id="content_header"></div>
+      <div class="container" fit layout vertical>
+
+          <iron-pages selected="{{page}}"  flex>
+            <section>
+              <paper-ripple style="color: #009688"></paper-ripple>
+              <paper-material elevation="3" class="iron-pages-demo-cards">
+                  <div class="demo_card_content">
+                    <paper-toolbar style="background-color:#009688;box-shadow: 0px 5px 0px #cfd8dc">
+                      <div style="font-family:Georgia;font-style: italic;font-size: 15px">Hi Kids, Welcome to TuxMindMath!</div>
+                    </paper-toolbar>
+                  </div>
+                  <div>
+                    <paper-menu flex>
+                    <paper-item><paper-fab style="background-color:teal" mini icon="av:play-circle-filled" ></paper-fab><span></span><div>Get ready to do superfast calculations!</div></paper-item>
+                    <paper-item><paper-fab style="background-color:teal" mini icon="av:play-circle-filled" ></paper-fab><span></span><div>Use the drawer menu to navigate to games</div></paper-item>
+
+                    <paper-item><paper-fab style="background-color:teal" mini icon="av:play-circle-filled" ></paper-fab><span></span><div>Enjoy the games! Thank you!</div></paper-item>
+
+                    <paper-item flex><div><img src="assets/penguin.jpg"></img></div><span flex></span><div><img src="assets/PenguinWords.png"></img></div></paper-item>
+                    </paper-menu>
+                  </div>
+              </paper-material>
+            </section>
+
+
+
+            <section >
+
+              <div id="GamesPage">
+                  <div flex>
+                    <paper-material elevation="3" class="demo-cards">
+                      <div class="demo_card_content"><paper-toolbar class="medium-tall" style="background-color:#01579b;box-shadow: 0px 5px 0px #cfd8dc">
+                              <div>Multiplication</div>
+                            </paper-toolbar>
+                      </div>
+                      <div>
+                        <paper-menu>
+
+                        <a href="#" onclick="gameLoader(1)">
+                        <paper-item flex style="position: relative" >
+                        <paper-ripple style="color: #01579b"></paper-ripple>
+                        <paper-fab style="background-color:#01579b" mini icon="av:play-arrow" ></paper-fab>
+                        Multiplication by 50
+                        <span flex>
+                        </span>
+                        </paper-item>
+                      </a>
+
+
+                        <a href="#" onclick="gameLoader(2)">
+                        <paper-item flex style="position: relative">
+                        <paper-ripple style="color: #01579b"></paper-ripple>
+                        <paper-fab style="background-color:#01579b" mini icon="av:play-arrow" ></paper-fab>
+                        Multiplication by 25
+                        <span flex>
+                        </span>
+                        </paper-item>
+                        </a>
+
+
+
+                        <paper-item flex style="position: relative">
+                        <paper-ripple style="color: #01579b"></paper-ripple>
+                        <paper-fab style="background-color:#01579b" mini icon="av:play-arrow" ></paper-fab>
+                        Multiplication by 11
+                        <span flex>
+                        </span>
+                        </paper-item>
+
+                      </paper-menu>
+                      </div>
+                    </paper-material>
+
+
+                    <paper-material elevation="3" class="demo-cards">
+                      <div class="demo_card_content">
+                        <paper-toolbar class="medium-tall" style="background-color:#00796b;box-shadow: 0px 5px 0px #cfd8dc">
+                              <div>Division</div>
+                        </paper-toolbar>
+                      </div>
+                      <div>
+                        <paper-menu>
+
+                          <a href="#"  onclick="gameLoader(3)">
+                        <paper-item flex style="position: relative">
+                        <paper-ripple style="color: #00796b"></paper-ripple>
+                        <paper-fab style="background-color:#00796b" mini icon="av:play-arrow" ></paper-fab>
+                        <span>
+                        Division by 10
+                        </span>
+                        </paper-item>
+                      </a>
+
+
+                        <a href="#" onclick="gameLoader(4)">
+                        <paper-item flex style="position: relative" >
+                        <paper-ripple style="color: #00796b"></paper-ripple>
+                        <paper-fab style="background-color:#00796b" mini icon="av:play-arrow" ></paper-fab>
+                        Division by 9
+                        <span flex>
+                        </span>
+                        </paper-item>
+                      </a>
+
+
+
+                        <paper-item flex style="position: relative">
+                        <paper-ripple style="color: #00796b"></paper-ripple>
+                        <paper-fab style="background-color:#00796b" mini icon="av:play-arrow" ></paper-fab>
+                        Division by 8
+                        <span flex>
+                        </span>
+                        </paper-item>
+
+
+
+                      </paper-menu>
+                      </div>
+                    </paper-material>
+                    <paper-material elevation="3" class="demo-cards">
+                      <div class="demo_card_content"><paper-toolbar class="medium-tall"  style="background-color:#e91e63;box-shadow: 0px 5px 0px #cfd8dc">
+                              <div>Addition</div>
+                            </paper-toolbar>
+                      </div>
+                      <div>
+                        <paper-menu>
+
+                          <a href="#"  onclick="gameLoader(5)">
+                        <paper-item flex style="position: relative">
+                        <paper-ripple style="color: #e91e63"></paper-ripple>
+                        <paper-fab style="background-color:#e91e63" mini icon="av:play-arrow" ></paper-fab>
+                        Numbers that end by 7
+                        <span flex>
+                        </span>
+                        </paper-item>
+                      </a>
+
+
+                      <a href="#"  onclick="gameLoader(6)">
+                        <paper-item flex style="position: relative">
+                        <paper-ripple style="color: #e91e63"></paper-ripple>
+                        <paper-fab style="background-color:#e91e63" mini icon="av:play-arrow" ></paper-fab>
+                        Numbers that end by 8
+                        <span flex>
+                        </span>
+                        </paper-item>
+                      </a>
+
+
+                        <paper-item flex style="position: relative" >
+                        <paper-ripple style="color: #e91e63"></paper-ripple>
+                        <paper-fab style="background-color:#e91e63" mini icon="settings" ></paper-fab>
+                        More tricks coming soon!
+                        <span flex>
+                        </span>
+                        </paper-item>
+
+                      </paper-menu>
+                      </div>
+                    </paper-material>
+
+                    <paper-material elevation="3" class="demo-cards">
+                      <div class="demo_card_content"><paper-toolbar class="medium-tall" style="background-color:#673ab7;box-shadow: 0px 5px 0px #cfd8dc">
+                              <div>Subtraction</div>
+                            </paper-toolbar>
+                      </div>
+                      <div>
+
+                        <paper-menu>
+                          <a href="#"  onclick="gameLoader(7)">
+                        <paper-item flex style="position: relative">
+                        <paper-ripple style="color: #673ab7"></paper-ripple>
+                        <paper-fab style="background-color:#673ab7" mini icon="av:play-arrow" ></paper-fab>
+                        Subtracting numbers close to 100
+                        <span flex>
+                        </span>
+                        </paper-item>
+                      </a>
+
+
+                      <a href="#"  onclick="gameLoader(8)">
+                        <paper-item flex style="position: relative">
+                        <paper-ripple style="color: #673ab7"></paper-ripple>
+                        <paper-fab style="background-color:#673ab7" mini icon="av:play-arrow" ></paper-fab>
+                        Subtracting number from 1000
+                        <span flex>
+                        </span>
+                        </paper-item>
+                      </a>
+
+
+
+                        <paper-item flex style="position: relative">
+                        <paper-ripple style="color: #673ab7"></paper-ripple>
+                        <paper-fab style="background-color:#673ab7" mini icon="settings" ></paper-fab>
+                        More tricks coming soon!
+                        <span flex>
+                        </span>
+                        </paper-item>
+
+                      </paper-menu>
+                      </div>
+                    </paper-material>
+                    <paper-material elevation="3" class="demo-cards">
+                      <div class="demo_card_content"><paper-toolbar class="medium-tall" style="background-color:#ff5722;box-shadow: 0px 5px 0px #cfd8dc">
+                              <div>Squares</div>
+                            </paper-toolbar>
+                      </div>
+                      <div>
+                        <paper-menu>
+
+                        <a href="#" onclick="gameLoader(9)">
+                        <paper-item flex style="position: relative">
+                        <paper-ripple style="color: #00c853"></paper-ripple>
+                        <paper-fab style="background-color:#ff5722" mini icon="av:play-arrow" ></paper-fab>
+                        Numbers ending with 5
+                        <span flex>
+                        </span>
+                        </paper-item>
+                        </a>
+
+
+                      <a href="#" onclick="gameLoader(10)">
+                        <paper-item flex style="position: relative" >
+                        <paper-ripple style="color: #00c853"></paper-ripple>
+                        <paper-fab style="background-color:#ff5722" mini icon="av:play-arrow" ></paper-fab>
+                        Numbers ending with 25
+                        <span flex>
+                        </span>
+                        </paper-item>
+                      </a>
+
+
+                        <paper-item flex style="position: relative">
+                        <paper-ripple style="color: #00c853"></paper-ripple>
+                        <paper-fab style="background-color:#ff5722" mini icon="av:play-arrow" ></paper-fab>
+                        Numbers in between 10 & 19
+                        <span flex>
+                        </span>
+                        </paper-item>
+
+                      </paper-menu>
+                      </div>
+                    </paper-material>
+
+                    </div>
+
+                </div>
+            </section>
+
+            <section >
+              <paper-ripple style="color: #03a9f4"></paper-ripple>
+              <paper-material elevation="3" class="iron-pages-demo-cards">
+                  <div class="demo_card_content">
+                    <paper-toolbar style="background-color:#03a9f4;box-shadow: 0px 5px 0px #cfd8dc">
+                      <div style="font-family:Georgia;font-style: italic;font-size: 15px">Tux4Kids</div>
+                    </paper-toolbar>
+                  </div>
+                  <div>
+                    <paper-menu flex>
+                    <paper-item><span></span><div style="font-family:Georgia;font-size:12px"><p>Tux4Kids develops high-quality software for kids, with the goal of combining fun and learning into an irresistable package. Our software is free: you can download it for use at home or onto hundreds of computers in a school. We support all major platforms, including Windows, Macintosh, and Linux/Unix. Our programs are used by people around the globe, and they have been translated into dozens of different languages. As open-source software, these programs can be freely extended or customized, and they are supported by active communities of volunteer developers.<break>Whether you're a parent, a teacher, or a kid, give Tux4Kids software a try!</p></div></paper-item>
+
+                    <paper-item><paper-fab style="background-color:#03a9f4" mini icon="hardware:toys" ></paper-fab><span></span><div>WebSite</div><iron-icon icon="chevron-right"></iron-icon><div><a href="http://tux4kids.alioth.debian.org/">http://tux4kids.alioth.debian.org/</a></div></paper-item>
+                    </paper-menu>
+                  </div>
+              </paper-material>
+            </section>
+
+            <section>
+              <paper-ripple style="color: #03a9f4"></paper-ripple>
+              <paper-material elevation="3" class="iron-pages-demo-cards-feedback">
+                  <div class="demo_card_content">
+                    <paper-toolbar style="background-color:#03a9f4;box-shadow: 0px 5px 0px #cfd8dc">
+                      <div style="font-family:Georgia;font-style: italic;font-size: 15px">Your valuable feedback or suggestions !</div>
+                    </paper-toolbar>
+                  </div>
+                  <div>
+                    <iframe src="http://goo.gl/forms/ZgOJoEbrUL" width="590" height="550" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
+                  </div>
+              </paper-material>
+            </section>
+
+           
+
+          </iron-pages>
+      </div>
+
+    </paper-header-panel>
+  </paper-drawer-panel>
+  </template>
+  <script type="text/javascript" src="script.js"></script>
+</div>
+  </body>
+ 
+</html>
